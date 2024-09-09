@@ -7,9 +7,9 @@ public class StateContext
         get; set;
     }
 
-    private readonly CharacterController _characterController;
+    private readonly CharacterStateController _characterController;
 
-    public StateContext (CharacterController characterController)
+    public StateContext (CharacterStateController characterController)
     {
         _characterController = characterController;
     }
@@ -21,6 +21,9 @@ public class StateContext
 
     public void Transition(IState state)
     {
+        if (CurrentState != null)
+            CurrentState.Exit(_characterController);
+        
         CurrentState = state;
         CurrentState.Handle(_characterController);
     }
