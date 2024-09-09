@@ -8,8 +8,13 @@ Build:https://dubbep.github.io/State-Machine/
 Controls:
 
 Move: A/D
+
 Dive: S (In The Air)
+
 Duck: S (While standing)
+
 Jump: Space (While Standing or Moving)
+
 Bounce: B (While in Air, B Again To Stop)
+
 Become Unstable: U (While Standing, U Again To Stop)
