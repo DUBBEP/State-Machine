@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpingState : BaseAirState, IState
+public class FallState : BaseAirState, IState
 {
     private CharacterStateController _characterController;
     private float groundCheckWait;
@@ -12,8 +12,6 @@ public class JumpingState : BaseAirState, IState
         if (!_characterController)
             _characterController = characterController;
 
-        _characterController.rb.velocity = new Vector3(_characterController.rb.velocity.x, 0, _characterController.rb.velocity.z);
-        _characterController.rb.AddForce(Vector3.up * _characterController.jumpForce, ForceMode.Impulse);
         groundCheckWait = 0.1f;
     }
 
@@ -31,9 +29,6 @@ public class JumpingState : BaseAirState, IState
                                                 _characterController.rb.velocity.y,
                                                 _characterController.rb.velocity.z);
 
-
-
-
         if (Input.GetKeyDown(KeyCode.S))
             _characterController.Dive();
 
@@ -47,10 +42,8 @@ public class JumpingState : BaseAirState, IState
 
     public void PhysicsUpdate()
     {
-        if (Input.GetKey(KeyCode.Space))
-            _characterController.rb.AddForce(Vector3.down * _characterController.jumpingGravForce);
-        else
-            _characterController.Fall();
-
+        _characterController.rb.AddForce(Vector3.down * _characterController.fallingGravForce);
     }
+
+
 }

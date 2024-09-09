@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandingState : MonoBehaviour, IState
+public class StandingState : BaseGroundState, IState
 {
     private CharacterStateController _characterController;
 
@@ -23,6 +23,8 @@ public class StandingState : MonoBehaviour, IState
             _characterController.Jump();
         if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && Mathf.Abs(Input.GetAxis("Horizontal")) > 0 )
             _characterController.Move();
+
+        FallCheck(_characterController);
 
         Debug.Log("StandUpdate");
     }

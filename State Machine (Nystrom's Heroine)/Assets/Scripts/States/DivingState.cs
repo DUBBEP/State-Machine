@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DivingState : MonoBehaviour, IState
+public class DivingState : BaseAirState, IState
 {
     private CharacterStateController _characterController;
 
@@ -23,9 +23,9 @@ public class DivingState : MonoBehaviour, IState
         if (!_characterController)
             return;
 
-        if (Physics.CheckBox(transform.position + new Vector3(0, -0.11f, 0),
-                                                    new Vector3(0.2f, 0.1f, 0.2f), Quaternion.identity))
-            _characterController.Stand();
+        // checks for the ground and input for bounce state
+        BasicAirStateChecks(_characterController);
+
         Debug.Log("DiveUpdate");
     }
 

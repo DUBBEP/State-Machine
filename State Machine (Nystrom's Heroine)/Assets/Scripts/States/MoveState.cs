@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : MonoBehaviour, IState
+public class MoveState : BaseGroundState, IState
 {
     private CharacterStateController _characterController;
     public void Exit() { return; }
@@ -24,6 +24,8 @@ public class MoveState : MonoBehaviour, IState
             _characterController.rb.velocity = new Vector3(xInput * _characterController.walkSpeed,
                                                             _characterController.rb.velocity.y,
                                                             _characterController.rb.velocity.z);
+
+        FallCheck(_characterController);
 
         if (Input.GetKeyDown(KeyCode.Space))
             _characterController.Jump();

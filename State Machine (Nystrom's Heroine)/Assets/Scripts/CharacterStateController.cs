@@ -11,29 +11,32 @@ public class CharacterStateController : MonoBehaviour
     public float fallingGravForce = 6f;
 
     private IState
-       _standingState, _jumpState, _diveState, _duckState, _moveState;
+       _standingState, _jumpState, _diveState, _duckState, _moveState, _fallState, _bounceState;
 
     public Rigidbody rb;
-    
+    public BoxCollider boxCollider;
     private StateContext _stateContext;
-    private bool _isGrounded;
 
     private void Start()
     {
         _stateContext = new StateContext(this);
         rb = GetComponent<Rigidbody>(); 
+        boxCollider = GetComponentInChildren<BoxCollider>();
 
         _standingState =
-             gameObject.AddComponent<StandingState>();
+            gameObject.AddComponent<StandingState>();
         _jumpState =
-             gameObject.AddComponent<JumpingState>();
+            gameObject.AddComponent<JumpingState>();
         _diveState =
-             gameObject.AddComponent<DivingState>();
+            gameObject.AddComponent<DivingState>();
         _duckState =
-             gameObject.AddComponent<DuckingState>();
+            gameObject.AddComponent<DuckingState>();
         _moveState =
-             gameObject.AddComponent<MoveState>();
-
+            gameObject.AddComponent<MoveState>();
+        _fallState =
+            gameObject.AddComponent<FallState>();
+        _bounceState =
+            gameObject.AddComponent<BounceState>();
 
         _stateContext.Transition(_standingState);
     }
@@ -67,6 +70,18 @@ public class CharacterStateController : MonoBehaviour
         _stateContext.Transition(_moveState);
         Debug.Log("Standing");
 
+    }
+
+    public void Fall()
+    {
+        _stateContext.Transition(_fallState);
+        Debug.Log("Falling");
+    }
+
+    public void Bounce()
+    {
+        _stateContext.Transition(_bounceState);
+        Debug.Log("Bouncing");
     }
 
 

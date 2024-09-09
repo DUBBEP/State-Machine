@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class DuckingState : MonoBehaviour, IState
+public class DuckingState : BaseGroundState, IState
 {
     private CharacterStateController _characterController;
 
@@ -28,6 +28,7 @@ public class DuckingState : MonoBehaviour, IState
         }
         Debug.Log("DuckUpdate");
 
+        FallCheck(_characterController);
     }
 
     public void PhysicsUpdate() { return; }
