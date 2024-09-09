@@ -6,9 +6,10 @@ public class CharacterStateController : MonoBehaviour
     public float jumpForce = 5.0f;
     public float diveSpeed = 5.0f;
     public float duckHeight = 0.5f;
+    public float walkSpeed = 5.0f;
 
     private IState
-       _standingState, _jumpState, _diveState, _duckState;
+       _standingState, _jumpState, _diveState, _duckState, _moveState;
 
     public Rigidbody rb;
     
@@ -28,6 +29,8 @@ public class CharacterStateController : MonoBehaviour
              gameObject.AddComponent<DivingState>();
         _duckState =
              gameObject.AddComponent<DuckingState>();
+        _moveState =
+             gameObject.AddComponent<MoveState>();
 
 
         _stateContext.Transition(_standingState);
@@ -57,29 +60,17 @@ public class CharacterStateController : MonoBehaviour
 
     }
 
-    
+    public void Move()
+    {
+        _stateContext.Transition(_moveState);
+        Debug.Log("Standing");
+
+    }
+
+
     private void Update()
     {
-        Debug.Log("Running InputChecks");
-
-
-
-        if (_stateContext.CurrentState == _standingState && Input.GetKeyDown(KeyCode.S))
-            Duck();
-        if (_stateContext.CurrentState == _duckState && Input.GetKeyUp(KeyCode.S))
-            Stand();
-        if (_stateContext.CurrentState == _jumpState && Input.GetKeyDown(KeyCode.S))
-            Dive();
-        if (_stateContext.CurrentState == _standingState && Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-            _isGrounded = false;
-        }
-        if (!_isGrounded && Physics.Raycast(transform.position, Vector3.down, 0.5f))
-        {
-            Stand();
-            _isGrounded = true;
-        }
+        _stateContext.HandleUpdate();
     }
      
 }

@@ -22,9 +22,14 @@ public class StateContext
     public void Transition(IState state)
     {
         if (CurrentState != null)
-            CurrentState.Exit(_characterController);
+            CurrentState.Exit();
         
         CurrentState = state;
         CurrentState.Handle(_characterController);
+    }
+
+    public void HandleUpdate()
+    {
+        CurrentState.UpdateState();
     }
 }

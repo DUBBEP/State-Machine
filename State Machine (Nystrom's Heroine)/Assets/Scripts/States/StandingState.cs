@@ -12,24 +12,18 @@ public class StandingState : MonoBehaviour, IState
             _characterController = characterController;
     }
 
-    public void Exit(CharacterStateController characterController) { return; }
+    public void Exit() { return; }
 
-    void Update()
+    public void UpdateState()
     {
-        if (!_characterController)
-            return;
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
+        if (Input.GetKey(KeyCode.S))
             _characterController.Duck();
-        }
 
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             _characterController.Jump();
-        }
+        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && Mathf.Abs(Input.GetAxis("Horizontal")) > 0 )
+            _characterController.Move();
 
         Debug.Log("StandUpdate");
-
     }
 }

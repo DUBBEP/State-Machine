@@ -15,9 +15,9 @@ public class DuckingState : MonoBehaviour, IState
         GetComponent<Transform>().localScale = new Vector3 (1, _characterController.duckHeight, 1);
     }
 
-    public void Exit(CharacterStateController characterController) { GetComponent<Transform>().localScale = new Vector3(1, 1, 1); }
+    public void Exit() { GetComponent<Transform>().localScale = new Vector3(1, 1, 1); }
 
-    void Update()
+    public void UpdateState()
     {
         if (!_characterController)
             return;
