@@ -28,4 +28,7 @@ public class MoveState : MonoBehaviour, IState
         if (Input.GetKeyDown(KeyCode.Space))
             _characterController.Jump();
     }
+
+    public void PhysicsUpdate() { return; }
+
 }

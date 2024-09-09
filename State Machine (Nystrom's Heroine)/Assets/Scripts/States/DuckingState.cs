@@ -29,4 +29,6 @@ public class DuckingState : MonoBehaviour, IState
         Debug.Log("DuckUpdate");
 
     }
+
+    public void PhysicsUpdate() { return; }
 }

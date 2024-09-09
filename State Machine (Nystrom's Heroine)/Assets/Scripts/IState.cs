@@ -6,4 +6,6 @@ public interface IState
     void Exit();
     void UpdateState();
 
+    void PhysicsUpdate();
+
 }

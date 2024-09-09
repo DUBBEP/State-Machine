@@ -28,4 +28,7 @@ public class DivingState : MonoBehaviour, IState
             _characterController.Stand();
         Debug.Log("DiveUpdate");
     }
+
+    public void PhysicsUpdate() { return; }
+
 }

@@ -32,4 +32,9 @@ public class StateContext
     {
         CurrentState.UpdateState();
     }
+
+    public void HandlePhysics()
+    {
+        CurrentState.PhysicsUpdate();
+    }
 }

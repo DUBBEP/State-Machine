@@ -26,4 +26,7 @@ public class StandingState : MonoBehaviour, IState
 
         Debug.Log("StandUpdate");
     }
+
+    public void PhysicsUpdate() { return; }
+
 }

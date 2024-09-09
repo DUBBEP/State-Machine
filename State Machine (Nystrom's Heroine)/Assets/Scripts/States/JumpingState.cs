@@ -26,6 +26,14 @@ public class JumpingState : MonoBehaviour, IState
 
         Debug.Log("JumpUpdate");
 
+        float xInput = Input.GetAxis("Horizontal");
+        _characterController.rb.velocity = new Vector3(xInput * _characterController.walkSpeed,
+                                                _characterController.rb.velocity.y,
+                                                _characterController.rb.velocity.z);
+
+
+
+
         if (Input.GetKeyDown(KeyCode.S))
             _characterController.Dive();
 
@@ -35,6 +43,15 @@ public class JumpingState : MonoBehaviour, IState
         if (groundCheckWait <= 0)
            CheckForGround();
     }
+
+    public void PhysicsUpdate()
+    {
+        if (Input.GetKey(KeyCode.Space))
+            _characterController.rb.AddForce(Vector3.down * _characterController.jumpingGravForce);
+        else
+            _characterController.rb.AddForce(Vector3.down * _characterController.fallingGravForce);
+    }
+
 
     void CheckForGround()
     {

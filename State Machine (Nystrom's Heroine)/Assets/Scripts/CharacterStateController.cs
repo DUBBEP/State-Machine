@@ -7,6 +7,8 @@ public class CharacterStateController : MonoBehaviour
     public float diveSpeed = 5.0f;
     public float duckHeight = 0.5f;
     public float walkSpeed = 5.0f;
+    public float jumpingGravForce = 3f;
+    public float fallingGravForce = 6f;
 
     private IState
        _standingState, _jumpState, _diveState, _duckState, _moveState;
@@ -72,5 +74,10 @@ public class CharacterStateController : MonoBehaviour
     {
         _stateContext.HandleUpdate();
     }
-     
+
+    private void FixedUpdate()
+    {
+        _stateContext.HandlePhysics();
+    }
+
 }
