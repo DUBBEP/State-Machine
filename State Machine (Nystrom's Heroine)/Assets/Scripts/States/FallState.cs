@@ -12,7 +12,7 @@ public class FallState : BaseAirState, IState
         if (!_characterController)
             _characterController = characterController;
 
-        groundCheckWait = 0.1f;
+        groundCheckWait = 0.05f;
     }
 
     public void Exit() { return; }

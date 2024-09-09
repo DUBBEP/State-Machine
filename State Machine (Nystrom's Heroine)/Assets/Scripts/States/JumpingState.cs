@@ -14,7 +14,7 @@ public class JumpingState : BaseAirState, IState
 
         _characterController.rb.velocity = new Vector3(_characterController.rb.velocity.x, 0, _characterController.rb.velocity.z);
         _characterController.rb.AddForce(Vector3.up * _characterController.jumpForce, ForceMode.Impulse);
-        groundCheckWait = 0.1f;
+        groundCheckWait = 0.05f;
     }
 
     public void Exit() { return; }
@@ -30,9 +30,6 @@ public class JumpingState : BaseAirState, IState
         _characterController.rb.velocity = new Vector3(xInput * _characterController.walkSpeed,
                                                 _characterController.rb.velocity.y,
                                                 _characterController.rb.velocity.z);
-
-
-
 
         if (Input.GetKeyDown(KeyCode.S))
             _characterController.Dive();

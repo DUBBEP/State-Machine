@@ -26,6 +26,9 @@ public class StandingState : BaseGroundState, IState
 
         FallCheck(_characterController);
 
+        if (Input.GetKeyDown(KeyCode.U))
+            _characterController.BecomeUnstable();
+
         Debug.Log("StandUpdate");
     }
 

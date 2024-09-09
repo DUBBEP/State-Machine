@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CharacterStateController : MonoBehaviour
 {
+    #region Variables
     // character variables below
     public float jumpForce = 5.0f;
     public float diveSpeed = 5.0f;
@@ -11,12 +12,16 @@ public class CharacterStateController : MonoBehaviour
     public float fallingGravForce = 6f;
 
     private IState
-       _standingState, _jumpState, _diveState, _duckState, _moveState, _fallState, _bounceState;
+       _standingState, _jumpState, _diveState, _duckState, 
+                _moveState, _fallState, _bounceState, _unstablePositionState;
 
     public Rigidbody rb;
     public BoxCollider boxCollider;
     private StateContext _stateContext;
 
+    #endregion
+
+    #region Start
     private void Start()
     {
         _stateContext = new StateContext(this);
@@ -37,10 +42,14 @@ public class CharacterStateController : MonoBehaviour
             gameObject.AddComponent<FallState>();
         _bounceState =
             gameObject.AddComponent<BounceState>();
+        _unstablePositionState =
+            gameObject.AddComponent<UnstablePositionState>();
 
         _stateContext.Transition(_standingState);
     }
+    #endregion
 
+    #region Transition Fuctions
     public void Jump()
     {
         _stateContext.Transition(_jumpState);
@@ -62,7 +71,6 @@ public class CharacterStateController : MonoBehaviour
     {
         _stateContext.Transition(_standingState);
         Debug.Log("Standing");
-
     }
 
     public void Move()
@@ -84,7 +92,14 @@ public class CharacterStateController : MonoBehaviour
         Debug.Log("Bouncing");
     }
 
+    public void BecomeUnstable()
+    {
+        _stateContext.Transition(_unstablePositionState);
+        Debug.Log("Becoming Unstable");
+    }
+    #endregion
 
+    #region Updates
     private void Update()
     {
         _stateContext.HandleUpdate();
@@ -94,5 +109,5 @@ public class CharacterStateController : MonoBehaviour
     {
         _stateContext.HandlePhysics();
     }
-
+    #endregion
 }

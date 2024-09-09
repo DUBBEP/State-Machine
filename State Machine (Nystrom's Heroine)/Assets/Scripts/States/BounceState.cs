@@ -33,7 +33,7 @@ public class BounceState : MonoBehaviour, IState
 
     public void PhysicsUpdate()
     {
-        if (_zeroGravTime < 0)
+        if (_zeroGravTime <= 0)
         _characterController.rb.AddForce(Vector3.down * _characterController.fallingGravForce);
     }
 
