@@ -46,7 +46,7 @@ public class JumpingState : BaseAirState, IState
     {
         if (Input.GetKey(KeyCode.Space))
             _characterController.rb.AddForce(Vector3.down * _characterController.jumpingGravForce);
-        else
+        else if (!Input.GetKey(KeyCode.Space) || _characterController.rb.velocity.y < 0)
             _characterController.Fall();
 
     }
