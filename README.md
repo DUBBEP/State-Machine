@@ -3,4 +3,5 @@
 
 Build:https://dubbep.github.io/State-Machine/
 
-![State Machine Diagram](https://github.com/user-attachments/assets/a98b27e4-4dc3-4d3a-a01e-a3b0dbbb44d2)
+![State Machine Diagram](https://github.com/user-attachments/assets/d629967f-9cc8-4c68-bb7b-2ca90843b35f)
+
